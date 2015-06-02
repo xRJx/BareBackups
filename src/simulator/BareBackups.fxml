@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulator.FXMLController">
+   <children>
+      <VBox layoutX="234.0" layoutY="83.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File" visible="false">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="fileOpenProfile" mnemonicParsing="false" text="Open Profile..." />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Save Profile" visible="false" />
+                        <MenuItem fx:id="fileSaveProfileAs" mnemonicParsing="false" text="Save Profile As..." />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" text="Quit" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Settings" visible="false">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Options" />
+                    </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="helpAbout" mnemonicParsing="false" text="About" />
+                        <MenuItem fx:id="helpGettingStarted" mnemonicParsing="false" text="Getting Started" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <GridPane hgap="10.0" minHeight="-Infinity" vgap="10.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" prefWidth="150.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" />
+                                    <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" />
+                                    <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Output Directory:" wrapText="true" />
+                                    <TextField id="outputDirectory" fx:id="outputDirectory" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                       <tooltip>
+                                          <Tooltip text="Where the backup file will be created." />
+                                       </tooltip>
+                                    </TextField>
+                                    <Button fx:id="outputDirectoryBrowse" mnemonicParsing="false" text="Browse" GridPane.columnIndex="3" />
+                                    <Label text="Input Directory:" wrapText="true" GridPane.rowIndex="1" />
+                                    <TextField fx:id="inputDirectory" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                       <tooltip>
+                                          <Tooltip text="The directory that will be backed up." />
+                                       </tooltip>
+                                    </TextField>
+                                    <Button fx:id="inputDirectoryBrowse" mnemonicParsing="false" text="Browse" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label text="Save Name:" wrapText="true" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin></Label>
+                                    <TextField fx:id="saveName" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                       <tooltip>
+                                          <Tooltip text="The name of the backup file." />
+                                       </tooltip>
+                                    </TextField>
+                                    <CheckBox fx:id="autoBackup" mnemonicParsing="false" text="Auto backup" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                                       <tooltip>
+                                          <Tooltip text="Runs backups at each defined interval." />
+                                       </tooltip>
+                                    </CheckBox>
+                                    <CheckBox fx:id="forceUnchangedBackups" disable="true" mnemonicParsing="false" text="Force unchanged backups" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                       <tooltip>
+                                          <Tooltip text="Backups will run even if no files have changed." />
+                                       </tooltip>
+                                    </CheckBox>
+                                    <Label fx:id="backupIntervalLabel" disable="true" text="Backup Interval:" wrapText="true" GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin></Label>
+                                    <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                       <children>
+                                          <Button fx:id="backupIntervalIncrement" disable="true" mnemonicParsing="false" text="▲" />
+                                          <Button fx:id="backupIntervalDecrement" disable="true" mnemonicParsing="false" text="▼" />
+                                       </children>
+                                    </HBox>
+                                    <Label disable="true" text=".zip" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="backupIntervalTime" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <TextField fx:id="backupInterval" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <tooltip>
+                                          <Tooltip text="The time between each auto backup." />
+                                       </tooltip>
+                                    </TextField>
+                                    <Label fx:id="backupCopiesLabel" disable="true" text="Backup Copies:" wrapText="true" GridPane.rowIndex="5" />
+                                    <TextField fx:id="backupCopies" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                                       <tooltip>
+                                          <Tooltip text="The number of backups to keep." />
+                                       </tooltip>
+                                    </TextField>
+                                    <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                       <children>
+                                          <Button fx:id="backupCopiesIncrement" disable="true" mnemonicParsing="false" text="▲" />
+                                          <Button fx:id="backupCopiesDecrement" disable="true" mnemonicParsing="false" text="▼" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <VBox layoutX="57.0" layoutY="60.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Console" />
+                              <TextArea fx:id="console" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                              <ProgressBar fx:id="progress" prefWidth="10000.0" progress="0.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
+               <children>
+                  <Button fx:id="beginBackup" mnemonicParsing="false" text="Begin Backup" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="startAutoBackup" mnemonicParsing="false" text="Start Auto Backup" />
+                  <Pane HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
